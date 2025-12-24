@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f7fb;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  gap: 20px;
+  padding: 20px;
+}
+
+.panel {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #fff;
+}
+
+button.primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
