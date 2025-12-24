@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/client.ts","./src/app/hooks.ts","./src/app/store.ts","./src/components/categorypanel.tsx","./src/components/filterpanel.tsx","./src/components/todopanel.tsx","./src/features/categories/categoriesslice.ts","./src/features/todos/todosslice.ts"],"version":"5.9.3"}
