@@ -205,9 +205,11 @@ export function TodoPanel({
                         <Button variant="outlined" onClick={() => onEditStart(todo)}>
                           Edit
                         </Button>
-                        <Button variant="outlined" color="error" onClick={() => onDeleteTodo(todo.id)}>
-                          Delete
-                        </Button>
+                        {editingId !== todo.id && (
+                          <Button variant="outlined" color="error" onClick={() => onDeleteTodo(todo.id)}>
+                            Delete
+                          </Button>
+                        )}
                       </Stack>
                     </CardContent>
                   </Card>
