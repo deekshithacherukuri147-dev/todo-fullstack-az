@@ -1,5 +1,14 @@
-const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:4000/api";
+const normalizeBaseUrl = () => {
+  const raw = import.meta.env.VITE_API_BASE_URL?.trim();
+  const fallback = "http://localhost:4000/api";
+  if (!raw) return fallback;
+
+  const trimmed = raw.replace(/\/+$/, "");
+  if (trimmed.endsWith("/api")) return trimmed;
+  return `${trimmed}/api`;
+};
+
+const BASE_URL = normalizeBaseUrl();
 
 async function request(url: string, options: RequestInit = {}) {
   const res = await fetch(`${BASE_URL}${url}`, {
@@ -10,10 +19,22 @@ async function request(url: string, options: RequestInit = {}) {
   });
 
   if (!res.ok) {
-    throw new Error(`API error: ${res.status}`);
+    let message = `API error: ${res.status}`;
+    try {
+      const data = await res.json();
+      if (data?.message) message = data.message;
+    } catch {
+      // ignore parse errors; keep default message
+    }
+    throw new Error(message);
   }
 
-  return res.json();
+  if (res.status === 204) return null;
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) return null;
+  const text = await res.text();
+  if (!text) return null;
+  return JSON.parse(text);
 }
 
 export const api = {
